@@ -1,4 +1,4 @@
-package com.kk.algorithm.recursive;
+package com.kk.algorithm.backtracking;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;

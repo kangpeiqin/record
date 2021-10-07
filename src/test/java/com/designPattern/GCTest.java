@@ -24,10 +24,14 @@ import java.util.ArrayList;
  * 2、跟踪类的加载与卸载（需要加载各种支持 Java 运行的核心类）
  * -XX:+TraceClassLoading 跟踪类的加载
  *
+ * 3、配置堆空间与栈空间
+ * -Xms：设置堆的初始空间大小；
+ * -Xmx：设置堆的最大空间大小。
+ *
  * @author kpq
  * @since 1.0.0
  */
-public class PrintGCTest {
+public class GCTest {
 
 
     @Test

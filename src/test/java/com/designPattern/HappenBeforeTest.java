@@ -14,11 +14,12 @@ public class HappenBeforeTest {
 
     class Demo {
         private int count = 2;
-        private boolean flag = false;
+        private volatile boolean flag = false;
 
         public void setCount() {
             count = 10;
-            flag = true;//没有volatile修饰，实际执行顺序，有可能是flag=true先执行
+            //没有volatile修饰，实际执行顺序，有可能是flag=true先执行
+            flag = true;
         }
 
         public void getCount() {
