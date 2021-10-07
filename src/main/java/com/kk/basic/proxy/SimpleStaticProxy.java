@@ -1,4 +1,4 @@
-package com.kk.proxy;
+package com.kk.basic.proxy;
 
 /**
  * @author kpq
