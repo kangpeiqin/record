@@ -1,8 +1,12 @@
 package com.proxy;
 
 import com.kk.basic.proxy.cglib.TargetInterceptor;
+import com.kk.basic.proxy.cglib.TargetMethodCallbackFilter;
 import com.kk.basic.proxy.cglib.TargetObject;
+import net.sf.cglib.proxy.Callback;
+import net.sf.cglib.proxy.CallbackFilter;
 import net.sf.cglib.proxy.Enhancer;
+import net.sf.cglib.proxy.NoOp;
 import org.junit.Test;
 
 /**
@@ -20,10 +24,24 @@ public class CglibTest {
         //设置拦截器TargetInterceptor
         enhancer.setCallback(new TargetInterceptor());
         //执行enhancer.create()动态生成一个代理类,并从Object强制转型成父类型TargetObject
-        TargetObject targetObject2 = (TargetObject) enhancer.create();
-        System.out.println(targetObject2);
+        TargetObject targetObject = (TargetObject) enhancer.create();
         //在代理类上调用方法
-        System.out.println(targetObject2.getParam("param"));
+        targetObject.getParam("param");
+        targetObject.getCount(4);
+    }
+
+    @Test
+    public void callbackTest(){
+        Enhancer enhancer =new Enhancer();
+        enhancer.setSuperclass(TargetObject.class);
+        CallbackFilter callbackFilter = new TargetMethodCallbackFilter();
+        Callback noopCb= NoOp.INSTANCE;
+        Callback callback1=new TargetInterceptor();
+        enhancer.setCallbackFilter(callbackFilter);
+        TargetObject targetObject2=(TargetObject)enhancer.create();
+        System.out.println(targetObject2);
+        System.out.println(targetObject2.getParam("mmm1"));
+        System.out.println(targetObject2.getCount(100));
     }
 
 }
