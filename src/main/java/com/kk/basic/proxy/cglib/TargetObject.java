@@ -1,8 +1,8 @@
 package com.kk.basic.proxy.cglib;
 
-import lombok.Getter;
 
 /**
+ * 目标对象，被代理对象
  * 没有实现接口，需要CGlib动态代理的目标类
  *
  * @author kpq

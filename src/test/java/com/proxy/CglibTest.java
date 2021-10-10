@@ -3,6 +3,7 @@ package com.proxy;
 import com.kk.basic.proxy.cglib.TargetInterceptor;
 import com.kk.basic.proxy.cglib.TargetMethodCallbackFilter;
 import com.kk.basic.proxy.cglib.TargetObject;
+import com.kk.basic.proxy.cglib.TargetResultFixed;
 import net.sf.cglib.proxy.Callback;
 import net.sf.cglib.proxy.CallbackFilter;
 import net.sf.cglib.proxy.Enhancer;
@@ -31,17 +32,25 @@ public class CglibTest {
     }
 
     @Test
-    public void callbackTest(){
-        Enhancer enhancer =new Enhancer();
+    public void callbackTest() {
+        //字节码增强器
+        Enhancer enhancer = new Enhancer();
         enhancer.setSuperclass(TargetObject.class);
+        //回调过滤器
         CallbackFilter callbackFilter = new TargetMethodCallbackFilter();
-        Callback noopCb= NoOp.INSTANCE;
-        Callback callback1=new TargetInterceptor();
+        //NoOp表示no operator，即什么操作也不做，代理类直接调用被代理的方法不进行拦截
+        Callback noopCb = NoOp.INSTANCE;
+        //方法拦截器
+        Callback callback = new TargetInterceptor();
+        //回调方法返回固定值
+        Callback fixedValue = new TargetResultFixed();
+        Callback[] cbArray = new Callback[]{callback, noopCb, fixedValue};
+        enhancer.setCallbacks(cbArray);
         enhancer.setCallbackFilter(callbackFilter);
-        TargetObject targetObject2=(TargetObject)enhancer.create();
-        System.out.println(targetObject2);
-        System.out.println(targetObject2.getParam("mmm1"));
-        System.out.println(targetObject2.getCount(100));
+        TargetObject targetObject = (TargetObject) enhancer.create();
+        System.out.println(targetObject);
+        targetObject.getParam("param");
+        targetObject.getCount(1);
     }
 
 }
