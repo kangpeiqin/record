@@ -11,6 +11,9 @@ import java.util.Map;
  */
 public class MapperRegistry {
 
+    /**
+     * 为每个mapper接口都缓存一个代理工厂类
+     */
     private final Map<Class<?>, MapperProxyFactory<?>> knownMappers = new HashMap<>();
 
 
