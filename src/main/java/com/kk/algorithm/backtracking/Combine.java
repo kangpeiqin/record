@@ -37,7 +37,9 @@ public class Combine {
             //不进行选择
             backtracking(n, k, i + 1, res, combination);
             combination.add(i);
+            //进行选择
             backtracking(n, k, i + 1, res, combination);
+            //回溯
             combination.removeLast();
         }
     }

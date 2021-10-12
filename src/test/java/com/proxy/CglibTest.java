@@ -44,13 +44,13 @@ public class CglibTest {
         Callback callback = new TargetInterceptor();
         //回调方法返回固定值
         Callback fixedValue = new TargetResultFixed();
+        //设置3中回调返回值方式：根据方法调用返回指定值，不进行操作，返回固定定制
         Callback[] cbArray = new Callback[]{callback, noopCb, fixedValue};
         enhancer.setCallbacks(cbArray);
         enhancer.setCallbackFilter(callbackFilter);
         TargetObject targetObject = (TargetObject) enhancer.create();
         System.out.println(targetObject);
         targetObject.getParam("param");
-        targetObject.getCount(1);
     }
 
 }
