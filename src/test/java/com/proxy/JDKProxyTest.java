@@ -1,8 +1,8 @@
 package com.proxy;
 
-import com.kk.basic.proxy.jdk.myBatisMapper.AuthorMapper;
-import com.kk.basic.proxy.jdk.myBatisMapper.BlogMapper;
-import com.kk.basic.proxy.jdk.myBatisMapper.MapperRegistry;
+import com.kk.basic.proxy.jdk.mbatisMapper.AuthorMapper;
+import com.kk.basic.proxy.jdk.mbatisMapper.BlogMapper;
+import com.kk.basic.proxy.jdk.mbatisMapper.MapperRegistry;
 import org.junit.Test;
 
 /**

@@ -3,18 +3,24 @@ package com.kk.basic.proxy.jdk;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
-import java.util.Objects;
 
 /**
  * 动态代理：可以为一组实现了共同接口的目标类类创建代理类(有JVM反射进行创建)
+ *  代理对象的创建方式变了，使用java.lang.reflect
+ *  包中的Proxy类的静态方法newProxyInstance来创建代理对象
+ *
+ * InvocationHandler 对代理接口所有方法的调用都会转给该方法
+ *
+ * 可以编写通用的代理逻辑，用于各种类型的被代理对象，
+ * 而不需要为每个被代理的类型都创建一个静态代理类。
  *
  * @author KPQ
  * @date 2021/10/12
  */
 public class SimpleDynamicProxy {
 
-    static interface IService {
-        public void sayHello();
+    interface IService {
+        void sayHello();
     }
 
     static class RealService implements IService {
