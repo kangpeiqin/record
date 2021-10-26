@@ -31,21 +31,21 @@ public class Permute {
         List<List<Integer>> ans = new ArrayList<>();
         boolean[] visit = new boolean[len + 1];
         Deque<Integer> path = new ArrayDeque<>();
-        dfs(nums, len, visit, path, 0, ans);
+        dfs(nums, visit, path, 0, ans);
         System.out.println(ans);
         return ans;
     }
 
-    private static void dfs(int[] nums, int len, boolean[] visit, Deque<Integer> path,
+    private static void dfs(int[] nums, boolean[] visit, Deque<Integer> path,
                             int depth, List<List<Integer>> ans) {
-        if (depth == len) {
+        if (depth == nums.length) {
             ans.add(new ArrayList<>(path));
         }
-        for (int i = 0; i < len; i++) {
+        for (int i = 0; i < nums.length; i++) {
             if (!visit[i]) {
                 path.add(nums[i]);
                 visit[i] = true;
-                dfs(nums, len, visit, path, depth + 1, ans);
+                dfs(nums, visit, path, depth + 1, ans);
                 //回溯
                 path.removeLast();
                 visit[i] = false;
