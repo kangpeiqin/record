@@ -16,6 +16,11 @@ import java.util.List;
  * 2、是当前字符作为一个新的分段数字的开始
  * <p>
  * 由于逐一处理字符串中的每个字符，因此需要n步，并且每一步都面临两个可能的选项
+ * 层              10203040
+ * 0        1       10       102.
+ * 1                             102.203.      ip + seg + '.'
+ * 2                                   102.203.0.
+ * 3                                         102.203.0.40
  *
  * @author KPQ
  * @date 2021/10/12
@@ -41,14 +46,15 @@ public class IpAddress {
         if (i == s.length() && segI == 3 && isValidSeg(seg)) {
             result.add(ip + seg);
         } else if (i < s.length() && segI <= 3) {
-            //获取当前字符
+            //获取当前遍历字符
             char c = s.charAt(i);
-            //判断是否为合法的ip段，当前字符拼接在末尾
+            //判断是否为合法的ip段，如果是，同一层，横向遍历，相当于进行剪枝操作，提前排除不符合的答案
             if (isValidSeg(seg + c)) {
                 help(s, i + 1, segI, seg + c, ip, result);
             }
-            //当前字符作为一个新的分段数字的开始
+            //当前字符作为一个新的分段数字的开始，纵向深度遍历，往下一层遍历
             if (seg.length() > 0 && segI < 3) {
+                //这边相当于开始了一个新的段，所以采用 ""+c
                 help(s, i + 1, segI + 1, "" + c, ip + seg + ".", result);
             }
         }
@@ -62,7 +68,7 @@ public class IpAddress {
     }
 
     public static void main(String[] args) {
-        System.out.println(resolveIpAddress("110203040"));
+        System.out.println(resolveIpAddress("210203140"));
     }
 
 }
