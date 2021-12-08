@@ -10,8 +10,8 @@ public class ClassLoaderTest {
     public static void main(String[] args) {
         int key = 1;
         String userDir = System.getProperty("user.dir");
-        String source = userDir + "\\target\\classes\\com\\kk\\basic\\classLoader\\Message.class";
-        String dist = userDir + "\\src\\main\\java\\com\\kk\\basic\\classLoader\\Message.crypt";
+        String source = userDir + "\\target\\classes\\com\\kk\\base\\classLoader\\Message.class";
+        String dist = userDir + "\\src\\main\\java\\com\\kk\\base\\classLoader\\Message.crypt";
         Crypt.crypt(key, source, dist);
         try {
             ClassLoader loader = new CryptoClassLoader(key, dist);
