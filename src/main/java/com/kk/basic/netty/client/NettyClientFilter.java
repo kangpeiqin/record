@@ -7,6 +7,9 @@ import io.netty.handler.codec.DelimiterBasedFrameDecoder;
 import io.netty.handler.codec.Delimiters;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
+import io.netty.handler.timeout.IdleStateHandler;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * 客户端过滤器
@@ -22,6 +25,7 @@ public class NettyClientFilter extends ChannelInitializer<SocketChannel> {
         ph.addLast("framer", new DelimiterBasedFrameDecoder(8192, Delimiters.lineDelimiter()))
                 .addLast("decoder", new StringDecoder())
                 .addLast("encoder", new StringEncoder())
-                .addLast("handler", new NettyClientHandler());
+                .addLast("handler", new NettyClientTestHandler())
+                .addLast( new IdleStateHandler(0, 4, 0, TimeUnit.SECONDS));
     }
 }

@@ -7,6 +7,9 @@ import io.netty.handler.codec.DelimiterBasedFrameDecoder;
 import io.netty.handler.codec.Delimiters;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
+import io.netty.handler.timeout.IdleStateHandler;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * 服务器端过滤器
@@ -24,6 +27,8 @@ public class NettyServerFilter extends ChannelInitializer<SocketChannel> {
                 .addLast("decoder", new StringDecoder())
                 .addLast("encoder", new StringEncoder())
                 //服务器端业务逻辑
-                .addLast("handler", new NettyServerHandler());
+                .addLast("handler", new NettyServerTestHandler())
+                .addLast(new IdleStateHandler(5, 0, 0, TimeUnit.SECONDS));
+        ;
     }
 }
