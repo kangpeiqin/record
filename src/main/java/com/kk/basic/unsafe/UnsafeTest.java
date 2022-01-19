@@ -10,7 +10,7 @@ import java.lang.reflect.Field;
  */
 public class UnsafeTest {
 
-    private static Unsafe reflectGetUnsafe() {
+    public static Unsafe reflectGetUnsafe() {
         try {
             Field field = Unsafe.class.getDeclaredField("theUnsafe");
             field.setAccessible(true);
@@ -19,6 +19,10 @@ public class UnsafeTest {
             System.out.println("error:" + e.getMessage());
             return null;
         }
+    }
+
+    public static void main(String[] args) {
+        reflectGetUnsafe();
     }
 
 }
