@@ -26,7 +26,7 @@ public class ThreadPoolTest {
 
         private void process() {
             try {
-                Thread.sleep(5000);
+                Thread.sleep(1000);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -34,7 +34,7 @@ public class ThreadPoolTest {
     }
 
     public static void main(String[] args) {
-        ThreadPoolExecutor executor = new ThreadPoolExecutor(5, 10, 1L, TimeUnit.SECONDS, new ArrayBlockingQueue<>(100), new ThreadPoolExecutor.AbortPolicy());
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(5, 6, 1L, TimeUnit.SECONDS, new ArrayBlockingQueue<>(2), new ThreadPoolExecutor.AbortPolicy());
         for (int i = 0; i < 1000; i++) {
             Runnable worker = new MyRunnable("" + i);
             executor.execute(worker);
