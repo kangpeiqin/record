@@ -1,6 +1,8 @@
 package com.kk.basic.multiThread;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -34,6 +36,8 @@ public class ThreadPoolTest {
     }
 
     public static void main(String[] args) {
+        Map<String, Integer> map = new HashMap<>(16);
+        map.put("test", 1);
         ThreadPoolExecutor executor = new ThreadPoolExecutor(5, 6, 1L, TimeUnit.SECONDS, new ArrayBlockingQueue<>(2), new ThreadPoolExecutor.AbortPolicy());
         for (int i = 0; i < 1000; i++) {
             Runnable worker = new MyRunnable("" + i);
