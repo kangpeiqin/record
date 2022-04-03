@@ -1,6 +1,8 @@
 package com.kk.algorithm.basic;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.PriorityQueue;
 
 /**
  * 前缀树，又称为字典树，
@@ -8,15 +10,13 @@ import java.util.List;
  * <p>
  * 前缀树是一棵多叉树，一个节点可能有多个子节点。前缀树中除根节点外，
  * 每个节点表示字符串中的一个字符，而字符串由前缀树的路径表示。
- * <p>
- * 应用：在哈希表中，只有输入完整的字符串才能进行查找操作，在前缀树中就没有这个限制，
- * 可以只输入字符串的前面若干字符，即前缀，查找以这个前缀开头的所有字符串
  *
  * @author KPQ
  * @date 2021/10/28
  */
 
 public class Trie {
+
     /**
      * 前缀树结点结构
      */
@@ -86,9 +86,22 @@ public class Trie {
         return true;
     }
 
-    private TriedNode buildTrie(List<String> dict) {
-        return null;
+    public int[] topKFrequent(int[] nums, int k) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int num : nums) {
+            map.put(num, map.getOrDefault(num, 0) + 1);
+        }
+        //创建一个优先队列并确定排序规则
+        PriorityQueue<Map.Entry<Integer, Integer>> queue = new PriorityQueue<>((e1, e2) -> e2.getValue() - e1.getValue());
+        //将所有的数据都加入到队列当中
+        queue.addAll(map.entrySet());
+        int[] ans = new int[k];
+        for (int i = 0; i < k; ++i) {
+            ans[i] = queue.poll().getKey();
+        }
+        return ans;
     }
+
 }
 
 
